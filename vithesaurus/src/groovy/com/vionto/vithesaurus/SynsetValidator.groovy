@@ -49,7 +49,7 @@ class SynsetValidator {
      * @param A boolean value, if a full validation should be executed.
      * @return True if validation didn't fail.
      */
-    private boolean extendedValidate(boolean fullValidation) {
+    public boolean extendedValidate(boolean fullValidation) {
         if (fullValidation) {
             // some simple assertions
             assert (synset)
