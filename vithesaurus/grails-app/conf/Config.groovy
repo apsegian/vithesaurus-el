@@ -8,15 +8,15 @@
 // after a clean:
 environments {
     test {
-        grails.config.locations = [ "classpath:datasource-test.properties",
+        grails.config.locations = [ 
                 "classpath:vithesaurus-dev.properties" ]
     }
     development {
-        grails.config.locations = [ "classpath:datasource-dev.properties",
+        grails.config.locations = [ 
                 "classpath:vithesaurus-dev.properties" ]
     }
     production {
-        grails.config.locations = [ "classpath:datasource.properties",
+        grails.config.locations = [ 
                 "classpath:vithesaurus.properties" ]
     }
 }
