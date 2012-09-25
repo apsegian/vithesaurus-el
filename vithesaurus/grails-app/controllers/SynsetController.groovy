@@ -585,7 +585,7 @@ class SynsetController extends BaseController {
       }
     }    
 
-    def searchWikipedia(String term, Connection conn) {
+   private def searchWikipedia(String term, Connection conn) {
       if (grailsApplication.config.thesaurus.wikipediaLinks != "true") {
         return null
       }
@@ -617,7 +617,7 @@ class SynsetController extends BaseController {
       return matches
     }
 
-    def searchWiktionary(String term, Connection conn) {
+    private def searchWiktionary(String term, Connection conn) {
       if (grailsApplication.config.thesaurus.wiktionaryLinks != "true") {
         return null
       }
@@ -645,7 +645,7 @@ class SynsetController extends BaseController {
       return matches
     }
     
-    def searchSimilarTerms(String term, Connection conn) {
+    private def searchSimilarTerms(String term, Connection conn) {
       String sql = """SELECT word, lookup FROM memwords 
 			WHERE ((
 				CHAR_LENGTH(word) >= ? AND CHAR_LENGTH(word) <= ?)
@@ -728,7 +728,7 @@ class SynsetController extends BaseController {
      * or database search via Hibernate query.
      * See doDBSearch() for parameters.
      */
-    def doSearch(String query, Section section, Source source, Category category,
+    private def doSearch(String query, Section section, Source source, Category category,
             int max = -1, int offset = 0) {
         // currently we always use DB search, not fulltext search
         // because it was too slow on indexing:
@@ -741,7 +741,7 @@ class SynsetController extends BaseController {
      * Hibernate-based search implementation. Note that the number
      * of total matches is not always accurate.
      */
-    def doDBSearch(String query, Section section, Source source,
+    private def doDBSearch(String query, Section section, Source source,
             Category category, int max = -1, int offset = 0) {
         String sortField = params.sort ? params.sort : "synsetPreferredTerm"
         if (grailsApplication.config.thesaurus.prefTerm == 'false') {
@@ -824,7 +824,7 @@ class SynsetController extends BaseController {
      * Split a string and return an array so that each non-empty
      * line is one array item.
      */
-    String[] getTermsFromTextArea(String str) {
+    private String[] getTermsFromTextArea(String str) {
         String[] terms = str.split("[\n\r]")
         return terms.findAll { term -> term.trim() != "" }
     }
@@ -1434,7 +1434,7 @@ class SynsetController extends BaseController {
     /**
      * Get all the languages which are used by the given synset's terms.
      */
-    Set getLanguages(Synset synset) {
+    private Set getLanguages(Synset synset) {
         Set languages = new HashSet()
         for (term in synset.terms) {
             languages.add(term.language)

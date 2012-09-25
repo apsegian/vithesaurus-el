@@ -25,11 +25,12 @@ class RejectedWord {
     
     /** The word that has been rejected explicitly */
     String word
-    /** The user that rejected the word */
-    ThesaurusUser user
+    
     /** The date at which the word was rejected */
     Date rejectionDate
 
+    static belongsTo = [user : ThesaurusUser]
+    
     static mapping = {
         //id generator:'sequence', params:[sequence:'rejected_word_seq']
     }

@@ -23,12 +23,12 @@ package com.vionto.vithesaurus;
 class TermLink {
 
     Term targetTerm
+    Term term
     TermLinkType linkType
 
     static belongsTo = [term:Term]
 
     static mapping = {
-        //id generator:'sequence', params:[sequence:'synset_link_seq']
     }
 
     TermLink() {

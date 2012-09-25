@@ -37,6 +37,8 @@ class LinkType {
 	/** The name when used in a sentence, e.g. "A is a B" */
 	String verbName
 	
+    static hasMany = [synsetLinkSuggestions : SynsetLinkSuggestion]
+    
     static constraints = {
         linkName(unique:true)
         verbName(unique:true)

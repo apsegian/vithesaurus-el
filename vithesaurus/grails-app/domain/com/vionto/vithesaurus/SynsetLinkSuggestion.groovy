@@ -24,13 +24,12 @@ package com.vionto.vithesaurus;
 class SynsetLinkSuggestion implements Comparable {
 
     Synset targetSynset
-    LinkType linkType
     /**
      * Number of facts that back this link.
      */
     int factCount
 
-    static belongsTo = [synset:Synset]
+    static belongsTo = [synset:Synset, linkType : LinkType]
 
     static mapping = {
         //id generator:'sequence', params:[sequence:'synset_link_suggestion_seq']

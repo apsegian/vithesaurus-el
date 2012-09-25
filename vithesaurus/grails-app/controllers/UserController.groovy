@@ -21,6 +21,7 @@ import java.security.MessageDigest
 import com.vionto.vithesaurus.tools.IpTools
 
 class UserController extends BaseController {
+    UserService userService;
     
     def beforeInterceptor = [action: this.&auth, 
                              except: ['login', 'register', 'doRegister', 'confirmRegistration',
@@ -41,7 +42,7 @@ class UserController extends BaseController {
     }
     
     def doRegister = {
-      def user = new ThesaurusUser(params.userId, UserController.md5sum(params.password1),
+      def user = new ThesaurusUser(params.userId, userService.md5sum(params.password1),
           ThesaurusUser.USER_PERM)
       user.realName = params.visibleName
       if (!params.userId || params.userId.trim().isEmpty()) {
@@ -176,7 +177,7 @@ class UserController extends BaseController {
           ThesaurusUser user = new ThesaurusUser()
         } else {
           ThesaurusUser user = 
-              ThesaurusUser.findByUserIdAndPassword(params.userId, md5sum(params.password))
+              ThesaurusUser.findByUserIdAndPassword(params.userId, userService.md5sum(params.password))
           if (user) {
             if (user.blocked) {
               log.warn("login failed for user ${params.userId} (${IpTools.getRealIpAddress(request)}): user is blocked")
@@ -292,7 +293,7 @@ class UserController extends BaseController {
           return
         }
         log.info("Setting user password for '${user.userId}'")
-        user.password = md5sum(params.password1)
+        user.password = userService.md5sum(params.password1)
         user.confirmationCode = ""
         boolean saved = user.validate() && user.save()
         if (!saved) {
@@ -356,7 +357,7 @@ class UserController extends BaseController {
             /*String passwordBackup = user.password
             user.properties = params
             if (params.password != "") {
-                user.password = md5sum(params.password)
+                user.password = userService.md5sum(params.password)
             } else {
                 user.password = passwordBackup
             }
@@ -391,7 +392,7 @@ class UserController extends BaseController {
             return
         }
         ThesaurusUser user = new ThesaurusUser(params)
-        user.password = md5sum(params.password)
+        user.password = userService.md5sum(params.password)
         if(!user.hasErrors() && user.save()) {
             flash.message = "User ${user.id} created"
             log.info("User ${user.userId} created")
@@ -401,17 +402,4 @@ class UserController extends BaseController {
             render(view:'create',model:[user:user])
         }
     }
-
-    public static String md5sum(String str) {
-        // a pseudo-random salt:
-        final String salt = "hi234z2ejgrr97otw4ujzt4wt7jtsr4975FERedefef"
-        str = str + "/" + salt
-        MessageDigest md = MessageDigest.getInstance("MD5")
-        md.update(str.getBytes(), 0, str.length())
-        byte[] md5sum = md.digest()
-        BigInteger bigInt = new BigInteger(1, md5sum)
-        return bigInt.toString(16)
-    }
-
-}
- 
+} 

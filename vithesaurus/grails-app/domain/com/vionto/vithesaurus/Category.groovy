@@ -35,6 +35,8 @@ class Category implements Comparable, Cloneable {
     /** Mapping to a simplified category */
     Category categoryType
     
+    static hasMany = [categoryLinks : CategoryLink, synsets : Synset]
+    
     static constraints = {
         categoryName(unique:true)
         uri(nullable:true,unique:true)

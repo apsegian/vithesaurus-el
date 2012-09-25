@@ -23,6 +23,7 @@ package com.vionto.vithesaurus;
 class SynsetLink implements Comparable {
 
     Synset targetSynset
+    Synset synset
     LinkType linkType
 
     /**
@@ -41,7 +42,7 @@ class SynsetLink implements Comparable {
      */
     int factCount = 0
     
-    static belongsTo = [synset:Synset]
+    static belongsTo = Synset
 
     static mapping = {
         //id generator:'sequence', params:[sequence:'synset_link_seq']

@@ -26,15 +26,12 @@ import com.vionto.vithesaurus.SynsetValidator
 class Synset implements Cloneable {
 
     boolean isVisible
-    Source source   // Note: there's also sources for cases there are more sources
     String originalURI      // used to track the original source and its ID
     String userComment
     // The preferred term for the synset (not per language). This causes
     // redundancy, but we need it to sort by preferred term (also see
     // PREFERRED_TERM_LANGS):
     String synsetPreferredTerm
-    Category preferredCategory
-    Section section
     int evaluation
     Integer importStatus    // != null -> automatically imported
     Integer originalId		// id from PHP version of OpenThesaurus (if data was imported)
@@ -53,7 +50,15 @@ class Synset implements Cloneable {
                       userEvents:UserEvent,
                       preferredTermLinks:PreferredTermLink,
                       sources:SourceLink]
-
+    
+    static mappedBy = [synsetLinkSuggestions:'synset',
+                       synsetLinks : 'synset' ]
+    
+    static hasOne = [ section : Section,
+                      preferredCategory: Category,
+                      source : Source // Note: there's also sources for cases there are more sources
+                    ]
+    
     static constraints = {
         userComment(nullable:true)
         source(nullable:true)

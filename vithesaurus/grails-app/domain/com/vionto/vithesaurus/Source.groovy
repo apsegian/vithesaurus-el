@@ -28,6 +28,8 @@ class Source implements Cloneable, Comparable {
 
   //static searchable = [only: ['sourceName']]
   
+  static hasMany = [synsets : Synset]
+  
   static constraints = {
       sourceName(unique:true)
       uri(unique:true)

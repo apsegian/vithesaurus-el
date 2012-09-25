@@ -26,6 +26,8 @@ class WordGrammar {
         //id generator:'sequence', params:[sequence:'word_grammar_seq']
     }
 
+    static hasMany = [terms : Term]
+    
     String form
     
     String toString() {

@@ -25,6 +25,8 @@ class TermLevel {
   String levelName
   String shortLevelName
 
+  static hasMany = [terms : Term]
+  
   static constraints = {
     levelName(unique:true)
     shortLevelName(unique:true)

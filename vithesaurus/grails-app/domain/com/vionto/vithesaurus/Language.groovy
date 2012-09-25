@@ -27,6 +27,8 @@ class Language {
   /** If disabled == true, cannot be selected when creating new synsets or terms */
   Boolean isDisabled
 
+  static hasMany = [terms : Term]
+  
   static mapping = {
       //id generator:'sequence', params:[sequence:'language_seq']
   }

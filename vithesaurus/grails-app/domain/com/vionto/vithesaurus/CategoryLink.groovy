@@ -23,8 +23,9 @@ package com.vionto.vithesaurus;
 class CategoryLink implements Comparable {
 
     Category category
+    Synset synset
     
-    static belongsTo = [synset:Synset]
+    static belongsTo = [Synset, Category]
 
     static mapping = {
         //id generator:'sequence', params:[sequence:'category_link_seq']

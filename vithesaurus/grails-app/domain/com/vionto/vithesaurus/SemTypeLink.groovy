@@ -23,8 +23,9 @@ package com.vionto.vithesaurus;
 class SemTypeLink implements Comparable {
 
     SemType semType
+    Synset synset
     
-    static belongsTo = [synset:Synset]
+    static belongsTo = Synset
 
     static mapping = {
         //id generator:'sequence', params:[sequence:'sem_type_link_seq']

@@ -24,14 +24,10 @@ import com.vionto.vithesaurus.tools.StringTools;
  */
 class Term implements Comparable, Cloneable {
 
-    Synset synset           // synset to which this term belongs
     String word
     String normalizedWord	// normalized version of 'word' for searches (e.g. parentheses removed)
     boolean isShortForm     // is the word an abbreviation?
     boolean isAcronym       // is the word an acronym (e.g. AIDS)
-    Language language
-    TermLevel level             // language level like "colloquial"
-    WordGrammar wordGrammar     // base form, plural form, etc.
     String userComment
     Integer originalId		// id from PHP version of OpenThesaurus (if data was imported)
 
@@ -40,9 +36,16 @@ class Term implements Comparable, Cloneable {
         "[ 0-9a-zA-ZöäüÖÄÜßëçèéáàóòÈÉÁÀÓÒãñíş\\{\\}\\\"\\?\\*=()\\-\\+/.,'_:<>;%°" +
             "\\!\\[\\]&#αΑβΒγΓδΔεΕζΖηΗθΘιΙκΚλΛμΜνΝξΞοΟπΠρΡσΣτΤυΥφΦχΧψΨωΩ]+"
 
-    static belongsTo = [synset:Synset]
+    static belongsTo = [synset : Synset] // synset to which this term belongs
     
     static hasMany = [termLinks:TermLink]
+    
+    static hasOne = [level : TermLevel, // language level like "colloquial"
+                     language : Language,
+                     wordGrammar: WordGrammar // base form, plural form, etc.
+                    ]
+    
+    static mappedBy = [termLinks:'term']
 
     static constraints = {
         word(matches:TERM_REGEXP,minSize:1,

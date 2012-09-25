@@ -23,8 +23,9 @@ package com.vionto.vithesaurus;
 class SourceLink implements Comparable {
 
     String uri
+    Synset synset
     
-    static belongsTo = [synset:Synset]
+    static belongsTo = Synset
 
     static mapping = {
         //id generator:'sequence', params:[sequence:'source_link_seq']

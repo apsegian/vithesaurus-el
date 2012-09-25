@@ -45,6 +45,8 @@ class ThesaurusUser {
         confirmationCode(nullable:true)
     }
 
+    static hasMany = [rejectectWords : RejectedWord]
+    
     static mapping = {
         //id generator:'sequence', params:[sequence:'thesaurus_user_seq']
     }

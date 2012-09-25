@@ -31,6 +31,8 @@ class Section implements Comparable, Cloneable {
     
     //static searchable = [only: ['sectionName']]
     
+    static hasMany = [synsets : Synset]
+    
     static constraints = {
         sectionName(unique:true)
     }
