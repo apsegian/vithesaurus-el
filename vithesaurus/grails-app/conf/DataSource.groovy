@@ -13,19 +13,19 @@ hibernate {
 environments {
     development {
         dataSource {
-            dbCreate = "create-drop" // one of 'create', 'create-drop','update'
+            dbCreate = "update" // one of 'create', 'create-drop','update'
             url = "jdbc:mysql://127.0.0.1:3306/vithesaurus?useUnicode=true&characterEncoding=utf-8"
         }
     }
     test {
         dataSource {
-            dbCreate = "create-drop" // one of 'create', 'create-drop','update'
+            dbCreate = "validate" // one of 'create', 'create-drop','update'
             url = "jdbc:mysql://127.0.0.1:3306/vithesaurus?useUnicode=true&characterEncoding=utf-8"
         }
     }
     production {
         dataSource {
-            dbCreate = "update"
+            dbCreate = "validate"
             url = "jdbc:hsqldb:file:prodDb;shutdown=true"
         }
     }
