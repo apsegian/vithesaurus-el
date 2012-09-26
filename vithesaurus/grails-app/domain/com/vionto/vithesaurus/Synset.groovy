@@ -86,6 +86,11 @@ class Synset implements Cloneable {
         evaluation = 0
     }
 
+    Synset(Term term) {
+        this()
+        addTerm(term)
+    }
+    
     /**
      * Add the given term to this synset.
      * @throws IllegalArgumentException if a term with the same word
